@@ -34,6 +34,18 @@ quest warehouse begin
     state use begin
         when 9005.chat."Raktár" begin
             if pc.getqf("open_count") < 3 then
+				say_title(mob_name(9005)..":")
+				say("Üdvözöllek. Tudod mire hasznáják az arany rudat?")
+				say("Ha magaddal cipeled a Yangot, az olyan, mintha azt mondanád: Kérlek! Ölj meg!")
+				say("Ezért az emberek Yang-ját aranyrudakra cserélem, és ezeket a rudakat tárolom számukra.")
+				wait()
+				say_title(mob_name(9005)..":")
+				say("Rendben, akkor kérek egy kicsit többet, mint amennyit az aranyrúd ér.")
+				say("De egy ilyen szolgáltatásért ez még korrekt, nem igaz?")
+				say("Nincs ok arra, hogy becsapva érezd magad.")
+				say("Mint tudod, nagyon veszélyes odakint.")
+				wait()
+				pc.setqf("open_count", pc.getqf("open_count") + 1)
             end
             setskin(NOWINDOW)
 			game.open_safebox()
