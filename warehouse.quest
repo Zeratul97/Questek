@@ -52,9 +52,29 @@ quest warehouse begin
         end
 		when 9005.chat."Item shop raktár" begin
 			if pc.getqf("open_item_storage_count") < 3 then
+				say_title(mob_name(9005)..":")
+				say("Üdvözöllek! Szeretnéd megnézni az Item shop raktárad?")
+				say("Akkor miért jössz hozzám?")
+				say("Nézz csak a készletedbe, ott megtalálod.")
+				say("most már közvetlen hozzáféréssel rendelkezik.")
+				wait()
+				say_title(mob_name(9005)..":")
+				say_show_item(90013)
+				say("Egyszerűen kattintson erre az ikonra a hozzáféréshez.")
+				say("Hozzáférés az Itemshop raktárodhoz bármikor, bárhonnan.")
+				say("A jelszó 000000, kivéve, ha megváltoztattad .")
+				wait()
+				pc.setqf("open_item_storage_count", pc.getqf("open_item_storage_count") + 1)
 			end
 			setskin(NOWINDOW)
 			game.open_mall()
+		end
+		when 9005.chat."Ezüst/arany rúd vásárlás" begin
+			npc.open_shop()
+			say_title(mob_name(9005)..":")
+			say("A bányák mostanra mind kimerültek.")
+			say("Nagyon nehéz aranyat vagy ezüstöt találni.")
+			say("Amíg nem fedeznek fel új ércet, nincs arany vagy ezüst.")
 		end
     end
 end
