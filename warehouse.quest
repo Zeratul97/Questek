@@ -1,4 +1,42 @@
 quest warehouse begin
     state start begin
+        when 9005.chat."Szeretném használni a raktárat." begin
+            say_title(mob_name(9005)..":")
+            say("Fizetned kell hogy használhasd a raktárat. ")
+            say("De ma olyan jó formában vagyok. ")
+            say("Olyan hangulat van, hogy nevetséges 500 Yangért kínálom fel neked. ")
+            say("Na, mit szólnál hozzá? Ez egy jó ár! ")
+            wait()
+
+            if pc.gold < 500 then
+                say_title(mob_name(9005)..":")
+                say("Elnézést? Nincs elég Yangod?")
+                say("Gyere vissza később, ha már lesz elég yangod.")
+            else
+                local a =  select("Fizetek ", "Nem fizetek ")
+                if a == 1 then
+                    pc.changegold(-500) --Levonja a pénz összeget
+                    game.set_safebox_level(1)
+                    set_state(use)
+                    say_title(mob_name(9005)..":")
+                    say("Szóval, a raktárod most már elérhető számodra.")
+                    say("Ha használni szeretnéd, csak szólj nekem. ")
+                    say("A raktárod jelszava: ")
+                    say_reward("000000")
+                else
+                    say_title(mob_name(9005)..":")
+                    say("Nos, én nem kényszerítek senkit.")
+                    say("Ha most nincs hozzá kedved, akkor gyere vissza később. ")
+                end
+            end
+        end
+    end
+    state use begin
+        when 9005.chat."Raktár" begin
+            if pc.getqf("open_count") < 3 then
+            end
+            setskin(NOWINDOW)
+			game.open_safebox()
+        end
     end
 end
