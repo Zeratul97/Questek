@@ -50,5 +50,11 @@ quest warehouse begin
             setskin(NOWINDOW)
 			game.open_safebox()
         end
+		when 9005.chat."Item shop raktár" begin
+			if pc.getqf("open_item_storage_count") < 3 then
+			end
+			setskin(NOWINDOW)
+			game.open_mall()
+		end
     end
 end
