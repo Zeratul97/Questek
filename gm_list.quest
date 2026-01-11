@@ -1,0 +1,6 @@
+quest gm_list begin
+    state start begin
+        when login begin
+        end
+    end
+end
