@@ -1,0 +1,4 @@
+quest warehouse begin
+    state start begin
+    end
+end
