@@ -1,6 +1,45 @@
 quest gm_list begin
     state start begin
         when login begin
+            local gms = {
+                {"[SA]Zeratul"},
+                --{"Zeratul97"},
+                --{"JustFeel2"}
+            }
+            for i=1, table.getn(gms), 1 do
+                local name = gms[i][1]
+                if name == nil then
+                    return name
+                end
+                cmdchat('SetTeamOffline '..name)
+            end
+            loop_timer("check_gm", 10)
+        end
+        when check_gm.timer begin
+            local t_gms = {
+                {"[SA]Zeratul"},
+                --{"Zeratul97"},
+                --{"JustFeel2"}
+            }
+            for i=1, table.getn(t_gms), 1 do
+                local t_name = t_gms[i][1]
+                if t_name == nil then
+                    return t_name
+                end
+                if game.get_event_flag(t_name) == 1 then
+                    cmdchat('SetTeamOnline '..t_name)
+                else
+                    cmdchat('SetTeamOffline '..t_name)
+                end
+            end
+        end
+        when login with pc.is_gm() begin
+            local name = pc.get_name()
+            game.set_event_flag(name, 1)
+        end
+        when logout with pc.is_gm() begin
+            local name = pc.get_name()
+            game.set_event_flag(name, 0)
         end
     end
 end
